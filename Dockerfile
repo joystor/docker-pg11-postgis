@@ -140,7 +140,7 @@ RUN set -ex; \
 	apt-get install -y postgresql-common; \
 	sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/createcluster.conf; \
 	apt-get install -y \
-		"postgresql-$PG_MAJOR=$PG_VERSION" \
+		"postgresql-$PG_MAJOR" \
 	; \
 	\
 	rm -rf /var/lib/apt/lists/*; \
@@ -161,7 +161,8 @@ RUN set -eux; \
 	ln -sv ../postgresql.conf.sample "/usr/share/postgresql/$PG_MAJOR/"; \
 	sed -ri "s!^#?(listen_addresses)\s*=\s*\S+.*!\1 = '*'!" /usr/share/postgresql/postgresql.conf.sample; \
 	grep -F "listen_addresses = '*'" /usr/share/postgresql/postgresql.conf.sample
-	
+
+# PostGIS installation	
 RUN apt-get install -y postgresql-11-postgis-2.5-scripts postgresql-11-postgis-2.5 postgresql-plpython3-11 postgresql-11-pgrouting
 
 RUN mkdir -p /var/run/postgresql && chown -R postgres:postgres /var/run/postgresql && chmod 2777 /var/run/postgresql
