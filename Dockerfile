@@ -110,12 +110,12 @@ RUN set -ex; \
 			apt-get update; \
 			apt-get build-dep -y \
 				postgresql-common pgdg-keyring \
-				"postgresql-$PG_MAJOR=$PG_VERSION" \
+				"postgresql-$PG_MAJOR" \
 			; \
 			DEB_BUILD_OPTIONS="nocheck parallel=$(nproc)" \
 				apt-get source --compile \
 					postgresql-common pgdg-keyring \
-					"postgresql-$PG_MAJOR=$PG_VERSION" \
+					"postgresql-$PG_MAJOR" \
 			; \
 # we don't remove APT lists here because they get re-downloaded and removed later
 			\
